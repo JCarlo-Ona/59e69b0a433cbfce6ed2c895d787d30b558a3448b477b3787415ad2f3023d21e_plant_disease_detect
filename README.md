@@ -1,0 +1,2 @@
+# 59e69b0a433cbfce6ed2c895d787d30b558a3448b477b3787415ad2f3023d21e_plant_disease_detect
+MLOps Project/HW with plant disease detection
