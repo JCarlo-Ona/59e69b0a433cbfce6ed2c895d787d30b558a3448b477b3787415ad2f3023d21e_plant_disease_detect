@@ -1,0 +1,42 @@
+Plant Disease Detection Model Evaluation Report
+=================================================
+
+Model: Random Forest
+Dataset: Plant Disease Environmental Features
+Test Set Size: 2000 samples
+
+PERFORMANCE METRICS:
+-------------------
+Accuracy:  0.8615
+Precision: 0.7808
+Recall:    0.5913
+F1-Score:  0.6730
+
+CONFUSION MATRIX:
+----------------
+                Predicted
+Actual    Healthy  Diseased
+Healthy     1438       80
+Diseased     197      285
+
+INTERPRETATION:
+--------------
+- True Negatives (Healthy correctly identified): 1438
+- False Positives (Healthy misclassified as Diseased): 80
+- False Negatives (Diseased misclassified as Healthy): 197
+- True Positives (Diseased correctly identified): 285
+
+BUSINESS IMPACT:
+---------------
+- The model correctly identifies 86.2% of plants
+- Of plants predicted as diseased, 78.1% actually are diseased
+- Of actually diseased plants, 59.1% are correctly identified
+- F1-Score of 0.6730 indicates good balance between precision and recall
+
+FEATURE IMPORTANCE:
+------------------
+Environmental factors most important for disease prediction:
+1. Temperature-Humidity interactions
+2. Soil pH levels
+3. Rainfall patterns
+4. Stress indicators (heat, drought, pH stress)
