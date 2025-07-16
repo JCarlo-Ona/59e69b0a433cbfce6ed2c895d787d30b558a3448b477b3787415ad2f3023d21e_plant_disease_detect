@@ -2,21 +2,11 @@
 
 ## What This Project Does
 
-I built a machine learning model that predicts whether plants will get sick based on environmental conditions like temperature, humidity, rainfall, and soil pH. The model gets it right about 86% of the time, which is pretty decent for this kind of problem.
+I built a machine learning model that predicts whether plants will get sick based on environmental conditions like temperature, humidity, rainfall, and soil pH., from a Kaggle Dataset. The model gets it right about 86% of the time, which is pretty decent for this kind of problem. I was looking for a dataset that was interesting and my sister has a hydrophonics farm which measures water ph, so I thought it was a good start. I do apologize that it is a Kaggle dataset. It's a big deal in lettuce hydrophonics about humidity and temps since it can kill or let them dry out.
 
-I picked this dataset because plant diseases are a real problem for farmers, and being able to predict them early could help save crops. Plus, it makes sense that things like humidity and temperature would affect whether plants get diseases - anyone who's dealt with garden mold knows this!
+## Data
 
-## Getting the Data
-
-You can grab the dataset from my Google Drive: https://drive.google.com/drive/folders/1igO5WPGRts_gz9jL-rjeptZD-Vs82dRS?usp=sharing
-
-Just download the `plant_disease_dataset.csv` file and put it in the `data/raw/` folder. It's about 10,000 rows of plant data with environmental measurements.
-
-If you want to load it programmatically:
-```python
-import pandas as pd
-df = pd.read_csv("data/raw/plant_disease_dataset.csv")
-```
+You can grab the dataset from my Google Drive: https://drive.google.com/drive/folders/1igO5WPGRts_gz9jL-rjeptZD-Vs82dRS?usp=sharing, it is also available in Kaggle: https://www.kaggle.com/datasets/turakut/plant-disease-classification/data
 
 The data has:
 - **temperature, humidity, rainfall, soil_pH** (the environmental factors)
@@ -61,7 +51,7 @@ This will process the data, train the model, and test it.
 ## How I Organized Everything
 
 ```
-├── README.md                    # This file
+├── README.md                   # This file
 ├── pyproject.toml              # Lists all the packages needed
 ├── .pre-commit-config.yaml     # Code formatting rules
 ├── data/
@@ -79,10 +69,6 @@ This will process the data, train the model, and test it.
     └── metrics.txt             # Performance results
 ```
 
-I separated raw and processed data because you never want to mess with the original data - if something goes wrong, you can always start over. Each Python file does one specific thing, which makes it easier to debug and test individual parts.
-
-The models folder is where the trained AI "brain" gets saved, and reports is for the performance numbers that show how well it works.
-
 ## Code Quality Setup
 
 I set up some automatic code checking with these rules:
@@ -92,8 +78,6 @@ I set up some automatic code checking with these rules:
 - **check-added-large-files:** Stops me from accidentally uploading huge files to GitHub
 - **ruff:** Catches Python coding mistakes and keeps the style consistent
 - **black:** Automatically formats Python code so it all looks the same
-
-Basically, these tools make the code look professional and catch mistakes before they become problems. Every time I commit code, they automatically check and fix formatting issues.
 
 ## Running the Code
 
@@ -112,32 +96,14 @@ uv run python src/evaluation.py
 ## How Well It Works
 
 The Random Forest model performed best:
-- **86% accuracy** - gets it right 86 out of 100 times
-- **78% precision** - when it says a plant is diseased, it's right 78% of the time
-- **59% recall** - catches about 59% of all diseased plants
+- **86% accuracy**
+- **78% precision**
+- **59% recall**
 
-You can see all the detailed numbers in `reports/metrics.txt`.
+There is a summary of it in `reports/metrics.txt`.
 
-## Something That Went Wrong (And How I Fixed It)
+## Something that's was hard.
 
-The trickiest part was getting UV to work properly. I kept getting this weird error: "TypeError: Author #1 must be an inline table" when trying to run `uv sync`.
+The trickiest part was getting UV to work properly due to: "TypeError: Author #1 must be an inline table" when trying to run `uv sync`.
 
-Turns out the `pyproject.toml` file is really picky about formatting. I had written:
-```toml
-authors = ["My Name <email@example.com>"]
-```
-
-But it wanted:
-```toml
-authors = [{name = "My Name", email = "email@example.com"}]
-```
-
-Small difference, but it completely broke the setup! After some googling and reading error messages carefully, I figured out that TOML (the config file format) has very specific rules about how to structure data. Now I know to read documentation more carefully when setting up new tools.
-
-## What I'd Do Next
-
-If I had more time, I'd try:
-- Adding more features like seasonal patterns or plant types
-- Testing other ML algorithms like XGBoost
-- Building a simple web app where farmers could input their conditions and get predictions
-- Testing the model on real farm data to see if it actually works in practice
+Turns out the `pyproject.toml` file is really picky about formatting.

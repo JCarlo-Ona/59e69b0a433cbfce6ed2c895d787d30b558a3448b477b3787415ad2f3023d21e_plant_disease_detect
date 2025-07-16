@@ -1,8 +1,3 @@
-"""
-Model evaluation module for plant disease detection.
-Evaluates trained models and generates performance reports.
-"""
-
 import pandas as pd
 import joblib
 import os

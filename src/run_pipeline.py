@@ -1,8 +1,3 @@
-"""
-Complete ML pipeline for plant disease detection.
-Runs all steps from data preprocessing to model evaluation.
-"""
-
 from data_preprocessing import preprocess_data
 from model_training import train_model
 from evaluation import evaluate_saved_model
@@ -11,9 +6,6 @@ import time
 
 
 def main():
-    """
-    Execute the complete ML pipeline.
-    """
     print("=" * 60)
     print("PLANT DISEASE DETECTION ML PIPELINE")
     print("=" * 60)
