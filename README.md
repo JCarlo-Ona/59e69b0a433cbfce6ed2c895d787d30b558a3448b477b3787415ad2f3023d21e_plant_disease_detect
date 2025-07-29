@@ -18,6 +18,7 @@ The data has:
 ### What You Need
 - Python 3.9 or newer
 - Git
+- Docker Desktop (for Airflow orchestration)
 
 ### Getting Started
 ```bash
@@ -48,12 +49,63 @@ uv run python src/run_pipeline.py
 
 This will process the data, train the model, and test it.
 
+## 🚀 ML Pipeline Orchestration with Airflow
+
+### Pipeline Overview
+The project uses Apache Airflow to orchestrate a complete ML workflow:
+
+```
+preprocess_data → train_model → evaluate_model → pipeline_summary
+```
+
+### Task Details
+1. **preprocess_data**: Loads and splits the plant disease dataset
+2. **train_model**: Trains multiple models and selects the best performer
+3. **evaluate_model**: Evaluates the trained model on test data
+4. **pipeline_summary**: Displays comprehensive results summary
+
+### Running the Pipeline
+
+#### Start Airflow (when Docker Desktop works)
+```bash
+# Initialize Airflow
+docker-compose up airflow-init
+
+# Start all services
+docker-compose up -d
+
+# Access Airflow UI
+# http://localhost:8080
+# Username: airflow
+# Password: airflow
+```
+
+#### Manual Pipeline Execution
+```bash
+# Run the complete pipeline
+python src/run_pipeline.py
+```
+
+### Pipeline Features
+- ✅ **Task Dependencies**: Ensures proper execution order
+- ✅ **XCom Communication**: Shares data between tasks
+- ✅ **Error Handling**: Robust error management
+- ✅ **Logging**: Comprehensive task logging
+- ✅ **Manual Triggers**: On-demand pipeline execution
+
+### Monitoring
+- View task logs in Airflow UI
+- Monitor task duration and success rates
+- Track pipeline performance over time
+
 ## How I Organized Everything
 
 ```
 ├── README.md                   # This file
 ├── pyproject.toml              # Lists all the packages needed
 ├── .pre-commit-config.yaml     # Code formatting rules
+├── docker-compose.yml          # Airflow orchestration
+├── .env                        # Environment variables
 ├── data/
 │   ├── raw/                    # Original dataset goes here
 │   └── processed/              # Cleaned data gets saved here
@@ -65,6 +117,12 @@ This will process the data, train the model, and test it.
 │   └── run_pipeline.py         # Runs everything in order
 ├── models/
 │   └── plant_disease_model.pkl # The trained model
+├── deploy/                     # Deployment configs
+│   ├── airflow/
+│   │   ├── dags/              # Airflow DAGs
+│   │   └── logs/              # Pipeline logs
+│   └── docker/                # Docker configs
+├── config/                     # Configuration files
 └── reports/
     └── metrics.txt             # Performance results
 ```
