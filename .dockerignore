@@ -1,0 +1,36 @@
+# Git files (don't need in container)
+.git
+.gitignore
+
+# Python cache files (will be recreated)
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment (we create new one in container)
+.venv/
+venv/
+
+# IDE files (not needed in container)
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large data files (we'll mount these as volumes)
+data/raw/*.csv
+data/processed/*.csv
+models/*.pkl
+reports/*.txt
+
+# Development files (not needed in production container)
+README.md
+.pytest_cache/
+*.log
+
+# Docker files (don't copy into themselves)
+Dockerfile
+.dockerignore
+docker-compose.yml
