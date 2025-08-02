@@ -76,9 +76,7 @@ docker-compose up -d
 
 # Access Airflow UI
 # http://localhost:8080
-# Username: airflow
-# Password: airflow
-```
+# Password's in the files
 
 #### Manual Pipeline Execution
 ```bash
@@ -162,6 +160,8 @@ There is a summary of it in `reports/metrics.txt`.
 
 ## Something that's was hard.
 
-The trickiest part was getting UV to work properly due to: "TypeError: Author #1 must be an inline table" when trying to run `uv sync`.
+The trickiest part was getting UV to work properly due to: "TypeError: Author #1 must be an inline table" when trying to run `uv sync`. I think to add anything with Whitespace or solving the pre-commit hooks was hard.
 
-Turns out the `pyproject.toml` file is really picky about formatting.
+Airflow and DAG was also a pain to fix. Apparently my BIOS had its CPU Virtualization off so Docker Desktop and Airflow wouldn't work. It's also downloading the dependencies not on the image but in the containers so it was longer to run.
+
+We had to troubleshoot `PYTHONPATH` and Docker volumes carefully to make sure code ran as expected.
